@@ -6,15 +6,11 @@ import { showMessage } from 'react-native-flash-message'
 import { width, height } from '../constants/Utils'
 import Images from '../constants/Imagens'
 
-export default function Login({ navigation, route }) {
+export default function Login({ navigation }) {
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-   
-  }, [])
-
-  const signin = async () => {
-
+  function signin() {
+    navigation.navigate('Register')
   }
 
   return (
@@ -58,7 +54,7 @@ export default function Login({ navigation, route }) {
             <Button
               style={styles.buttonFacebook}
               color={'#fff'}
-              onPress={() => {}}
+              onPress={ signin }
               textStyle={{ color: '#000' }}
             >
               {/*<Image source={Images.FacebookLogo} style={styles.icon} />*/}
@@ -66,7 +62,7 @@ export default function Login({ navigation, route }) {
             <Button
               style={styles.buttonGoogle}
               color={'#ccc'}
-              onPress={signin}
+              onPress={ signin }
               textStyle={{ color: '#000' }}
               loading={loading}
             >
@@ -98,7 +94,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   buttonFacebook: {
-    backgroundColor: '#090',
+    backgroundColor: theme.COLORS.FACEBOOK,
     width: width - theme.SIZES.BASE * 4,
     height: theme.SIZES.BASE * 3,
     shadowRadius: 0,

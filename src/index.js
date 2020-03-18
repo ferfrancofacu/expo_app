@@ -4,6 +4,7 @@ import { Image, StyleSheet, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Block, GalioProvider, Text } from 'galio-framework';
 import FlashMessage, { showMessage } from 'react-native-flash-message';
+import Navigation from './navigation'
 
 import Login from './view/Login.js'
 import Dashboard from './view/Dashboard.js'
@@ -35,13 +36,19 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      isLoadingComplete: false
+      isLoadingComplete: false,
+      isAuth: false
     }
   }
 
   // Executa quando o app fecha
   componentWillUnmount() {
     console.log('app fechou')
+  }
+
+  componentDidMount() {
+    const user = true
+    this.setState({ isAusetStth: !!user })
   }
 
   render() {
@@ -59,7 +66,7 @@ export default class App extends React.Component {
         <PaperProvider>
           <GalioProvider>
             <Block flex>
-              <Login />
+              <Navigation isAuth={this.state.isAuth} />
             </Block>
 
             {/* comments */}
