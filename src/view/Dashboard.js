@@ -4,7 +4,9 @@ import { Block, Text } from 'galio-framework';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import Item from '../components/ItemDashborad'
 
-import { StatusHeight, HeaderHeight } from '../constants/Utils'
+import { HeaderHeight } from '../constants/Utils'
+
+import Auth from '../models/Auth'
 import Usuarios from '../models/Usuarios'
 
 function Dashboard({ navigation }) {
@@ -13,7 +15,7 @@ function Dashboard({ navigation }) {
   }, [])
 
   const _onSignOut = () => {
-    Usuarios.siginOut()
+    Auth.siginOut()
   }
 
   const _onAvatarPress = () => {
