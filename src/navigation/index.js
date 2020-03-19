@@ -4,7 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Dashboard from '../view/Dashboard'
+import Perfil from '../view/Perfil'
+
 import Login from '../view/Login'
+
 import Empyt from '../view/Empyt'
 
 const Stack = createStackNavigator();
@@ -17,6 +20,7 @@ export default function navigation({ isAuth }) {
         ?
           <>
             <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen name="Perfil" component={Perfil} />
           </>
         :
           <>
