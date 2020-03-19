@@ -17,7 +17,7 @@ export default function Login({ navigation }) {
     <Block flex style={styles.container}>
       <StatusBar hidden />
       <Block flex center>
-        {/*<Video
+        <Video
           source={require('../../assets/home_bg.mp4')}
           rate={1.0}
           volume={1.0}
@@ -26,10 +26,10 @@ export default function Login({ navigation }) {
           shouldPlay
           isLooping
           style={{ width, height, position: 'absolute' }}
-        />*/}
+        />
       </Block>
       <Block center>
-        <Image source={Images.Logo} style={styles.logo} />
+        <Image source={Images.logo} style={styles.logo} />
       </Block>
       <Block flex space="between" style={styles.padded}>
         <Block flex space="around" style={{ zIndex: 2 }}>
@@ -57,7 +57,7 @@ export default function Login({ navigation }) {
               onPress={ signin }
               textStyle={{ color: '#000' }}
             >
-              {/*<Image source={Images.FacebookLogo} style={styles.icon} />*/}
+              <Image source={Images.facebook} style={styles.icon} />
             </Button>
             <Button
               style={styles.buttonGoogle}
@@ -66,7 +66,7 @@ export default function Login({ navigation }) {
               textStyle={{ color: '#000' }}
               loading={loading}
             >
-              {/*<Image source={Images.GoogleLogo} style={styles.icon} />*/}
+              <Image source={Images.google} style={styles.icon} />
             </Button>
           </Block>
         </Block>

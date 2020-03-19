@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { AppLoading } from 'expo';
+import { Asset } from 'expo-asset'
 import { Image, StyleSheet, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Block, GalioProvider, Text } from 'galio-framework';
@@ -18,7 +19,9 @@ console.disableYellowBox = true;
 
 // cache app images
 const assetImages = [
-  Images.Logo
+  Images.logo,
+  Images.facebook,
+  Images.google
 ];
 
 function cacheImages(images) {

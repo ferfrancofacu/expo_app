@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 export default function navigation({ isAuth }) {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator headerMode={"none"}>
         {!!isAuth
         ?
           <>
