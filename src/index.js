@@ -7,12 +7,8 @@ import { Block, GalioProvider, Text } from 'galio-framework';
 import FlashMessage, { showMessage } from 'react-native-flash-message';
 import Navigation from './navigation'
 
-import Login from './view/Login.js'
-import Dashboard from './view/Dashboard.js'
-//import Auth from './Auth.js'
-
 import Images from './constants/Imagens'
-import { StatusHeight, HeaderHeight } from './constants/Utils'
+import Usuarios from './models/Usuarios'
 
 // tag amarelos chatos
 console.disableYellowBox = true;
@@ -46,16 +42,18 @@ export default class App extends React.Component {
 
   // Executa quando o app fecha
   componentWillUnmount() {
-    console.log('app fechou')
+    console.log('onClose')
   }
 
   componentDidMount() {
-    const user = true
-    this.setState({ isAusetStth: !!user })
+    console.log('onCreate')
+    Usuarios.onAuthChange(user => {
+      this.setState({ isAuth: !!user })
+    })
   }
 
   render() {
-    const { isLoadingComplete } = this.state
+    const { isLoadingComplete, isAuth } = this.state
     if (!isLoadingComplete) {
       return (
         <AppLoading
@@ -69,7 +67,7 @@ export default class App extends React.Component {
         <PaperProvider>
           <GalioProvider>
             <Block flex>
-              <Navigation isAuth={this.state.isAuth} />
+              <Navigation isAuth={isAuth} />
             </Block>
 
             {/* comments */}

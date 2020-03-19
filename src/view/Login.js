@@ -2,20 +2,45 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, StatusBar, Image } from 'react-native'
 import { Video } from 'expo-av';
 import { Block, Text, theme, Button, Icon } from 'galio-framework'
-import { showMessage } from 'react-native-flash-message'
+import SpinnerOverlay from 'react-native-loading-spinner-overlay';
 import { width, height } from '../constants/Utils'
 import Images from '../constants/Imagens'
+
+import Usuarios from '../models/Usuarios'
 
 export default function Login({ navigation }) {
   const [loading, setLoading] = useState(false)
 
-  function signin() {
-    navigation.navigate('Register')
+  useEffect(() => {
+
+  }, [])
+
+  async function logInGoogle() {
+    if(loading) return 
+    setLoading(true)
+
+    await Usuarios.onSignInGoogle()
+
+    setLoading(false)
+  }
+
+  async function logInFacebook() {
+    if(loading) return 
+    setLoading(true)
+
+    await new Promise((resolve, reject) => setTimeout(() => resolve(), 5000))
+
+    setLoading(false)
   }
 
   return (
     <Block flex style={styles.container}>
       <StatusBar hidden />
+      <SpinnerOverlay
+        visible={loading}
+        overlayColor={'#00000099'} 
+        textStyle={{ color: '#fff' }}
+      ></SpinnerOverlay>
       <Block flex center>
         <Video
           source={require('../../assets/home_bg.mp4')}
@@ -53,18 +78,13 @@ export default function Login({ navigation }) {
           <Block center>
             <Button
               style={styles.buttonFacebook}
-              color={'#fff'}
-              onPress={ signin }
-              textStyle={{ color: '#000' }}
+              onPress={logInFacebook}
             >
               <Image source={Images.facebook} style={styles.icon} />
             </Button>
             <Button
               style={styles.buttonGoogle}
-              color={'#ccc'}
-              onPress={ signin }
-              textStyle={{ color: '#000' }}
-              loading={loading}
+              onPress={logInGoogle}
             >
               <Image source={Images.google} style={styles.icon} />
             </Button>
