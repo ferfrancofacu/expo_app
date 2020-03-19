@@ -25,7 +25,8 @@ export default function Login({ navigation }) {
   async function logInFacebook() {
     if(loading) return 
     setLoading(true)
-    await new Promise((resolve, reject) => setTimeout(() => resolve(), 5000))
+    await new Promise((resolve, reject) => setTimeout(() => resolve(), 1000))
+    Auth._handleError('Ops, tente pelo Google')
     setLoading(false)
   }
 
