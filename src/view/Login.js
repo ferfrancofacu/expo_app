@@ -6,30 +6,26 @@ import SpinnerOverlay from 'react-native-loading-spinner-overlay';
 import { width, height } from '../constants/Utils'
 import Images from '../constants/Imagens'
 
-import Usuarios from '../models/Usuarios'
+import Auth from '../models/Auth'
 
 export default function Login({ navigation }) {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-
+    console.log('onCreate::Login')
   }, [])
 
   async function logInGoogle() {
     if(loading) return 
     setLoading(true)
-
-    await Usuarios.onSignInGoogle()
-
+    await Auth.onSignInGoogle()
     setLoading(false)
   }
 
   async function logInFacebook() {
     if(loading) return 
     setLoading(true)
-
     await new Promise((resolve, reject) => setTimeout(() => resolve(), 5000))
-
     setLoading(false)
   }
 

@@ -8,7 +8,7 @@ import FlashMessage, { showMessage } from 'react-native-flash-message';
 import Navigation from './navigation'
 
 import Images from './constants/Imagens'
-import Usuarios from './models/Usuarios'
+import Auth from './models/Auth'
 
 // tag amarelos chatos
 console.disableYellowBox = true;
@@ -42,12 +42,12 @@ export default class App extends React.Component {
 
   // Executa quando o app fecha
   componentWillUnmount() {
-    console.log('onClose')
+    console.log('onClose::Main')
   }
 
   componentDidMount() {
-    console.log('onCreate')
-    Usuarios.onAuthChange(user => {
+    console.log('onCreate::Main')
+    Auth.onAuthChange(user => {
       this.setState({ isAuth: !!user })
     })
   }
