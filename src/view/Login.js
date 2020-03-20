@@ -16,14 +16,14 @@ export default function Login({ navigation }) {
   }, [])
 
   async function logInGoogle() {
-    if(loading) return 
+    if (loading) return
     setLoading(true)
     await Auth.onSignInGoogle()
     setLoading(false)
   }
 
   async function logInFacebook() {
-    if(loading) return 
+    if (loading) return
     setLoading(true)
     await new Promise((resolve, reject) => setTimeout(() => resolve(), 1000))
     Auth._handleError('Ops, tente pelo Google')
@@ -35,7 +35,7 @@ export default function Login({ navigation }) {
       <StatusBar hidden />
       <SpinnerOverlay
         visible={loading}
-        overlayColor={'#00000099'} 
+        overlayColor={'#00000099'}
         textStyle={{ color: '#fff' }}
       ></SpinnerOverlay>
       <Block flex center>
@@ -52,40 +52,37 @@ export default function Login({ navigation }) {
       </Block>
       <Block center>
         <Image source={Images.logo} style={styles.logo} />
+        <Block left style={styles.subTitle}>
+            <Text color="white" size={12}>
+              Nos ajude a melhorar a cidade.
+            </Text>
+          </Block>
       </Block>
       <Block flex space="between" style={styles.padded}>
-        <Block flex space="around" style={{ zIndex: 2 }}>
-          <Block style={styles.title}>
-            <Block>
-              <Text color="white" size={60}>
-                Peruíbe
+        <Block style={styles.subTitle}>
+        </Block>
+        <Block>
+            <Text color="white" size={12} style={styles.textRedesSociais}>
+              Faça o seu login usando suas redes sociais.
+            </Text>
+          <Button
+            style={styles.buttonGoogle}
+            onPress={logInGoogle}
+          >
+            <Image source={Images.google} style={styles.icon} />
+            <Text color="black" size={12} style={styles.textRedesSociais}>
+              Login com Google
+            </Text>
+          </Button>
+          <Button
+            style={styles.buttonFacebook}
+            onPress={logInFacebook}
+          >
+            <Image source={Images.facebook} style={styles.icon} />
+            <Text color="white" size={12} style={styles.textRedesSociais}>
+                Login com facebook
               </Text>
-            </Block>
-            <Block>
-              <Text color="white" size={60}>
-                Melhor
-              </Text>
-            </Block>
-            <Block style={styles.subTitle}>
-              <Text color="white" size={16}>
-                Nos ajude a melhorar a cidade.
-              </Text>
-            </Block>
-          </Block>
-          <Block center>
-            <Button
-              style={styles.buttonFacebook}
-              onPress={logInFacebook}
-            >
-              <Image source={Images.facebook} style={styles.icon} />
-            </Button>
-            <Button
-              style={styles.buttonGoogle}
-              onPress={logInGoogle}
-            >
-              <Image source={Images.google} style={styles.icon} />
-            </Button>
-          </Block>
+          </Button>  
         </Block>
       </Block>
     </Block>
@@ -102,25 +99,33 @@ const styles = StyleSheet.create({
     bottom: theme.SIZES.BASE,
     zIndex: 2,
   },
+  textRedesSociais:{
+    marginBottom: 10,
+    marginTop:6,
+    marginStart:10
+  },
   buttonGoogle: {
     backgroundColor: '#fff',
     width: width - theme.SIZES.BASE * 4,
     height: theme.SIZES.BASE * 3,
     shadowRadius: 0,
     shadowOpacity: 0,
-    marginBottom: 20
+    marginBottom: 10,
+    flexDirection: "row"
   },
   buttonFacebook: {
-    backgroundColor: theme.COLORS.FACEBOOK,
+    backgroundColor: theme.COLORS.FACEBOOK, 
     width: width - theme.SIZES.BASE * 4,
     height: theme.SIZES.BASE * 3,
     shadowRadius: 0,
     shadowOpacity: 0,
-    marginBottom: 20
+    marginBottom: 10,
+    flexDirection: "row"
   },
   logo: {
     //width: 500,
     //height: 60,
+    
     zIndex: 2,
     position: 'relative',
     marginTop: '-50%'

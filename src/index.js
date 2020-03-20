@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset'
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View, StatusBar } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Block, GalioProvider, Text } from 'galio-framework';
 import FlashMessage, { showMessage } from 'react-native-flash-message';
 import Navigation from './navigation'
 
 import Images from './constants/Imagens'
+import ThemePaper from './constants/ThemePaper'
+
 import Auth from './models/Auth'
 
 // tag amarelos chatos
@@ -63,8 +65,8 @@ export default class App extends React.Component {
         />
       );
     } else {
-      return (
-        <PaperProvider>
+      return (        
+        <PaperProvider theme={ThemePaper}>
           <GalioProvider>
             <Block flex>
               <Navigation isAuth={isAuth} />

@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
 import { Block, Text } from 'galio-framework';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import Modal from 'react-native-modal';
 import Item from '../components/ItemDashborad'
-
-import { HeaderHeight } from '../constants/Utils'
+import { HeaderHeight, Abreviar } from '../constants/Utils'
 
 import Auth from '../models/Auth'
 import Usuarios from '../models/Usuarios'
@@ -14,18 +14,13 @@ function Dashboard({ navigation }) {
     console.log()
   }, [])
 
-  const _onSignOut = () => {
-    Auth.siginOut()
-  }
-
-  const _onAvatarPress = () => {
-    navigation.navigate('Perfil')
-    console.log('OnClick::Dashboard::AvartaIcon')
-  }
-
-  const _onItemPress = () => {
-    console.log('OnClick::Dashboard::Item')
-  }
+  const _onSignOut = () => Auth.siginOut()
+  const _onAvatarPress = () => navigation.navigate('Perfil')
+  const _onInterssePress = () => navigation.navigate('Interesses')
+  const _onPastasPress = () => navigation.navigate('Pastas')
+  const _onEventosPress = () => navigation.navigate('Eventos')
+  const _onAjudaPress = () => navigation.navigate('Ajuda')
+  const _onItemPress = () => console.log('OnClick::Dashboard::Item')
 
   return (
     <Block flex style={styles.mainContainer}>
@@ -37,7 +32,7 @@ function Dashboard({ navigation }) {
       <Block flex={0.2} style={styles.headerContainer}>
         <Block row middle>
           <Text h5 color={'white'} bold>
-            Olá, {Usuarios.currentUser.displayName}!
+            Olá, {Abreviar(Usuarios.currentUser.displayName)}!
           </Text>
           <TouchableOpacity
             onPress={_onAvatarPress}
@@ -60,10 +55,10 @@ function Dashboard({ navigation }) {
           <Text muted bold h5>Explorar</Text>
         </Block>
         <Block row middle style={{ flexWrap: 'wrap' }}>
-          <Item title={'Pastas'} subtitle={'Todas as pastas'} icon={'md-book'} onPress={_onItemPress} />
-          <Item title={'Interesses'} subtitle={'Pasta seguindo'} icon={'md-bookmark'} onPress={_onItemPress} />
-          <Item title={'Eventos'} subtitle={'Novos eventos'} icon={'md-map'} onPress={_onItemPress} />
-          <Item title={'Ajuda'} subtitle={'Avisos & Infor...'} icon={'ios-information-circle-outline'} onPress={_onItemPress} />
+          <Item title={'Pastas'} icon={'md-book'} onPress={_onPastasPress} />
+          <Item title={'Interesses'} icon={'md-bookmark'} onPress={_onInterssePress} />
+          <Item title={'Eventos'} icon={'md-map'} onPress={_onEventosPress} />
+          <Item title={'Ajuda'} icon={'ios-information-circle-outline'} onPress={_onAjudaPress} />
         </Block>
 
         <Button onPress={_onSignOut}>Sair</Button>

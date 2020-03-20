@@ -9,7 +9,9 @@ if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 // Initialize Firebase
-firebase.initializeApp(config);
+if(firebase){
+  firebase.initializeApp(config);
+}
 const database = firebase.firestore()
 
 export { database }
