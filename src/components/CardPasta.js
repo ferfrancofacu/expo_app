@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   right: {
     position: 'absolute',
     height: '100%',
-    right: 10
+    right: 10,
+    zIndex: 2
   }
 })

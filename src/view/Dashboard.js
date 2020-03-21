@@ -18,6 +18,7 @@ function Dashboard({ navigation }) {
 
   useEffect(() => {
     console.log()
+    categorias.openModal()
   }, [])
 
   const _onSignOut = () => Auth.siginOut()
@@ -27,6 +28,7 @@ function Dashboard({ navigation }) {
   const _onEventosPress = () => navigation.navigate('Eventos')
   const _onAjudaPress = () => navigation.navigate('Ajuda')
   const _onCategoriaPress = (categoria) => pastas.openModal()
+  const _onOpenPasta = (id_pasta) => navigation.navigate('Pastas')
 
   return (
     <Block flex style={styles.mainContainer}>
@@ -86,10 +88,13 @@ function Dashboard({ navigation }) {
       </SnappingList>
 
       {/* PASTAS MODAL */}
-      <SnappingList 
+      <SnappingList
         ref={el => { pastas = el }}
         headerTitle={'Pastas'}>
-        <CardPasta title='Ruinas' />
+        {Array(50)
+          .fill(0)
+          .map((_, i) => (
+            <CardPasta title='Ruinas' onPress={()=>console.log('card')} />))}
       </SnappingList>
     </Block>
   )

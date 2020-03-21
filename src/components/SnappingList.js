@@ -1,17 +1,44 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import * as Animatable from 'react-native-animatable'
 import { Modalize } from 'react-native-modalize';
-import { height } from '../constants/Utils'
+import { Button, Block } from 'galio-framework';
 import faker from 'faker';
+
+import { height } from '../constants/Utils'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class SnappingList extends React.PureComponent {
   modal = React.createRef();
 
-  renderHeader = ({ headerTitle }) => (
+  state = {
+    toTopButton: true
+  }
+
+  renderHeader = () => (
     <View style={s.modal__header}>
-      <Text style={s.modal__headerText}>{headerTitle}</Text>
+      <Text style={s.modal__headerText}>{this.props.headerTitle}</Text>
     </View>
   );
+
+  renderFooter = () => this.state.toTopButton && (
+      <TouchableOpacity
+        onPress={this.scrollToTop}
+        style={s.content__button}>
+        <Animatable.View
+          animation={'bounceIn'}>
+          <Button
+            onlyIcon
+            icon="up"
+            iconFamily="antdesign"
+            iconSize={15}
+            color="white"
+            iconColor="#ccc"
+            onPress={this.scrollToTop}
+            style={{ width: 40, height: 40 }} />
+        </Animatable.View>
+      </TouchableOpacity>
+  )
 
   renderContent = () => (
     <View style={s.content}>
@@ -51,15 +78,29 @@ export default class SnappingList extends React.PureComponent {
     }
   };
 
+  onScroll = ({ nativeEvent }) => {
+    const { toTopButton } = this.state
+    const y = nativeEvent.contentOffset.y
+    if (y > 0) {
+      if (!toTopButton)
+        this.setState({ toTopButton: true })
+    } else {
+      if (toTopButton)
+        this.setState({ toTopButton: false })
+    }
+  }
+
   render() {
-    const { flex = 0.75, fixed, headerTitle } = this.props
+    const { flex = 0.75, fixed } = this.props
     return (
       <Modalize
         ref={this.modal}
-        HeaderComponent={<this.renderHeader {...this.props} />}
+        HeaderComponent={this.renderHeader}
+        FooterComponent={this.renderFooter}
         snapPoint={height * flex}
         modalHeight={fixed ? height * flex : height}
-        modalStyle={s.modal}>
+        modalStyle={s.modal}
+        scrollViewProps={{ onScroll: this.onScroll }}>
         {/* {this.renderContent()} */}
         {this.props.children}
       </Modalize>
@@ -99,15 +140,18 @@ const s = StyleSheet.create({
     height: 38,
     marginRight: 15,
     overflow: 'hidden',
-    backgroundColor: '#eee',
+    backgroundColor: '#00000000',
     borderRadius: 19,
   },
   content__name: {
     fontSize: 16,
   },
   content__button: {
-    alignItems: 'center',
+    backgroundColor: '#00000000',
     justifyContent: 'center',
-    marginVertical: 20,
+    alignItems: 'flex-end',
+    height: 50,
+    width: 50,
+    bottom: 15
   },
 });
