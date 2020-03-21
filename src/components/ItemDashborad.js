@@ -12,21 +12,25 @@ export default function Item({
   title = 'Title',
   subtitle = '',
   icon = 'pin-3',
-  onPress = () => { }
+  onPress = () => { },
+  bottom,
+  i
 }) {
   return (
-    <Animatable.View animation={'zoomIn'}>
+    <Animatable.View animation={'zoomIn'} duration={500}>
       <TouchableOpacity
         style={styles.buttonContainer}
-        onPress={onPress}>
-        <Text>{title}</Text>
+        onPress={() => onPress(title)}>
+        {!bottom && <Text>{title}</Text>}
         <Block center middle flex>
           <Ionicons name={icon} family='octicon' color={'#2c3f5e'} size={50} />
         </Block>
-        <Block row space={'between'}>
-          <Text muted>{subtitle}</Text>
-          <Icon name={'chevron-right'} family='octicon' color={'#2c3f5e'} size={15} />
-        </Block>
+        {!!subtitle &&
+          <Block row space={'between'}>
+            <Text muted>{subtitle}</Text>
+            {!i && <Icon name={'chevron-right'} family='octicon' color={'#2c3f5e'} size={15} />}
+          </Block>}
+        {bottom && <Text center>{title}</Text>}
       </TouchableOpacity>
     </Animatable.View>
   );

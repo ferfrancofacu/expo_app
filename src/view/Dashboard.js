@@ -1,26 +1,32 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
-import { Block, Text } from 'galio-framework';
+import { Block, Text, Icon } from 'galio-framework';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import Modal from 'react-native-modal';
 import Item from '../components/ItemDashborad'
+import CardPasta from '../components/CardPasta'
+import ScrollableModal from '../components/ScrollableModal'
+import SnappingList from '../components/SnappingList'
 import { HeaderHeight, Abreviar } from '../constants/Utils'
 
 import Auth from '../models/Auth'
 import Usuarios from '../models/Usuarios'
 
 function Dashboard({ navigation }) {
+  let pastas = null
+  let categorias = null
+
   useEffect(() => {
     console.log()
   }, [])
 
   const _onSignOut = () => Auth.siginOut()
   const _onAvatarPress = () => navigation.navigate('Perfil')
-  const _onInterssePress = () => navigation.navigate('Interesses')
-  const _onPastasPress = () => navigation.navigate('Pastas')
+  const _onInterssePress = () => pastas.openModal() // navigation.navigate('Interesses')
+  const _onPastasPress = () => categorias.openModal()
   const _onEventosPress = () => navigation.navigate('Eventos')
   const _onAjudaPress = () => navigation.navigate('Ajuda')
-  const _onItemPress = () => console.log('OnClick::Dashboard::Item')
+  const _onCategoriaPress = (categoria) => pastas.openModal()
 
   return (
     <Block flex style={styles.mainContainer}>
@@ -28,8 +34,9 @@ function Dashboard({ navigation }) {
         source={{ uri: 'https://image.freepik.com/fotos-gratis/praia-tropical_74190-188.jpg' }}
         style={styles.imageBackground}>
       </ImageBackground>
+
       {/* HEADER */}
-      <Block flex={0.2} style={styles.headerContainer}>
+      <Block flex={0.15} style={styles.headerContainer}>
         <Block row middle>
           <Text h5 color={'white'} bold>
             Olá, {Abreviar(Usuarios.currentUser.displayName)}!
@@ -49,27 +56,48 @@ function Dashboard({ navigation }) {
           </Text>
         </Block>
       </Block>
+
       {/* MENUS */}
       <Block flex style={styles.contentContainer}>
         <Block middle>
           <Text muted bold h5>Explorar</Text>
         </Block>
         <Block row middle style={{ flexWrap: 'wrap' }}>
-          <Item title={'Pastas'} icon={'md-book'} onPress={_onPastasPress} />
-          <Item title={'Interesses'} icon={'md-bookmark'} onPress={_onInterssePress} />
-          <Item title={'Eventos'} icon={'md-map'} onPress={_onEventosPress} />
-          <Item title={'Ajuda'} icon={'ios-information-circle-outline'} onPress={_onAjudaPress} />
+          <Item title={'Pastas'} subtitle={'Total: 1000'} icon={'md-book'} onPress={_onPastasPress} />
+          <Item title={'Interesses'} subtitle={'Total: 0'} icon={'md-bookmark'} onPress={_onInterssePress} />
+          <Item title={'Eventos'} subtitle={'Explorar'} icon={'md-map'} onPress={_onEventosPress} />
+          <Item title={'Ajuda'} subtitle={'Dúvidas?'} icon={'ios-information-circle-outline'} onPress={_onAjudaPress} />
         </Block>
-
         <Button onPress={_onSignOut}>Sair</Button>
       </Block>
+
+      {/* CATEGORIAS MODAL */}
+      <SnappingList
+        ref={el => { categorias = el }}
+        headerTitle={'Categorias'}
+        flex={0.78}
+        fixed>
+        <Block row style={{ flexWrap: 'wrap' }}>
+          <Item bottom title={'Infraestrutura'} icon={'ios-construct'} onPress={_onCategoriaPress} i />
+          <Item bottom title={'Saúde'} icon={'ios-medkit'} onPress={_onCategoriaPress} i />
+          <Item bottom title={'Turismo'} icon={'ios-compass'} onPress={_onCategoriaPress} i />
+          <Item bottom title={'Lazer'} icon={'ios-cafe'} onPress={_onCategoriaPress} i />
+        </Block>
+      </SnappingList>
+
+      {/* PASTAS MODAL */}
+      <SnappingList 
+        ref={el => { pastas = el }}
+        headerTitle={'Pastas'}>
+        <CardPasta title='Ruinas' />
+      </SnappingList>
     </Block>
   )
 }
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: '#33628e'
+    backgroundColor: '#87BBE0'
   },
   headerContainer: {
     paddingTop: HeaderHeight - 15,
@@ -96,7 +124,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 0,
     zIndex: 1
   }
 })
