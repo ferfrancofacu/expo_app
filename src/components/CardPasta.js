@@ -12,7 +12,7 @@ export default function CardPasta({
 }) {
   return (
     <Card style={styles.card} onPress={() => onPress(codigo)}>
-      <Card.Title title={title} subtitle={categoria} left={(props) => (
+      <Card.Title title={title} subtitle={categoria}  left={(props) => (
         <Avatar.Icon {...props} icon="folder" color="white" />)} />
       <Card.Content style={styles.content}>
         <Paragraph>{descricao}</Paragraph>
