@@ -12,7 +12,7 @@ export default class SnappingList extends React.PureComponent {
   modal = React.createRef();
 
   state = {
-    toTopButton: true
+    toTopButton: false
   }
 
   renderHeader = () => (
@@ -22,6 +22,7 @@ export default class SnappingList extends React.PureComponent {
   );
 
   renderFooter = () => this.state.toTopButton && (
+    <View style={{width: '100%', alignItems:'flex-end'}}>
       <TouchableOpacity
         onPress={this.scrollToTop}
         style={s.content__button}>
@@ -38,6 +39,7 @@ export default class SnappingList extends React.PureComponent {
             style={{ width: 40, height: 40 }} />
         </Animatable.View>
       </TouchableOpacity>
+    </View>
   )
 
   renderContent = () => (
@@ -147,11 +149,10 @@ const s = StyleSheet.create({
     fontSize: 16,
   },
   content__button: {
-    backgroundColor: '#00000000',
     justifyContent: 'center',
     alignItems: 'flex-end',
     height: 50,
-    width: 50,
+    width: 40,
     bottom: 15
   },
 });

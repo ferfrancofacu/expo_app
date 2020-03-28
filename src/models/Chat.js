@@ -6,7 +6,7 @@ const MENSAGENS_PAGINA = 30
 
 class Chat extends Model {
   initChat = (id_chat, onLiveMenssage) => {
-    this.chatRoomRef = db.collection('CHAT').doc(id_chat).collection('mensagens')
+    this.chatRoomRef = database.collection('CHAT').doc(id_chat).collection('mensagens')
     this.liveUpdateListener = this.liveUpdateMessages(onLiveMenssage);
   }
 
