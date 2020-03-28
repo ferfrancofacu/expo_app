@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: '#f8f8f8',
     borderTopStartRadius: 40,
+    borderTopEndRadius: 40,
     paddingTop: 30
   },
   imageBackground: {

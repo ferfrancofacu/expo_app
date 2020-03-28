@@ -1,8 +1,5 @@
 import React from 'react'
 import { StyleSheet, KeyboardAvoidingView } from 'react-native'
-import { GiftedChat } from 'react-native-gifted-chat';
-import { Paragraph } from 'react-native-paper'
-import { Block } from 'galio-framework'
 import Chat from '../components/Chat'
 import Header from '../components/Header'
 import ChatRoom from '../models/Chat'
@@ -10,7 +7,8 @@ import ChatRoom from '../models/Chat'
 export default class ChatSreen extends React.Component {
   constructor(props) {
     super(props)
-    this.pasta = this.props.route.params.pasta
+    this.pasta = this.props.route.params.id_pasta
+    this.chat = new ChatRoom('8Vj8YPD40Z3Vq11TnZhx')
     this.state = {
       messages: [],
       numMessagesToIncrement: 20,
@@ -19,7 +17,8 @@ export default class ChatSreen extends React.Component {
   }
 
   componentDidMount() {
-    ChatRoom.initChat(this.pasta._id, this._onLiveMenssage)
+    console.log('asdas')
+    this.chat.liveUpdateMessages(this._onLiveMenssage)
   }
 
   _onLiveMenssage = (messages) => {
@@ -27,7 +26,7 @@ export default class ChatSreen extends React.Component {
   }
 
   onSend = ([messages]) => {
-    ChatRoom.sendMenssage(messages)
+    this.chat.sendMenssage(messages)
   }
 
   render() {

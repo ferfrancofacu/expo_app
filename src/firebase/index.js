@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import 'firebase/firestore';
 
 import config from './config.js';
@@ -8,10 +8,16 @@ import { decode, encode } from 'base-64'
 if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
-// Initialize Firebase
-if(firebase){
-  firebase.initializeApp(config);
+// Fix firestore crypto
+global.crypto = require("@firebase/firestore");
+global.crypto.getRandomValues = byteArray => { 
+  for (let i = 0; i < byteArray.length; i++) { 
+    byteArray[i] = Math.floor(256 * Math.random()); 
+  } 
 }
+
+// Initialize Firebase
+firebase.initializeApp(config);
 const database = firebase.firestore()
 
 export { database }
