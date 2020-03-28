@@ -1,8 +1,8 @@
-import Modal from './Modal'
+import Model from './Model'
 import firebase, { database } from '../firebase'
 import * as Google from 'expo-google-app-auth'
 
-class Usuarios extends Modal {
+class Usuarios extends Model {
   uid = ''
   currentUser = null
 

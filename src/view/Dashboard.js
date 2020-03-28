@@ -18,8 +18,9 @@ function Dashboard({ navigation }) {
 
   useEffect(() => {
     console.log()
-    categorias.openModal()
   }, [])
+
+  const [categoria, setCategoria] = useState("")
 
   const _onSignOut = () => Auth.siginOut()
   const _onAvatarPress = () => navigation.navigate('Perfil')
@@ -27,8 +28,12 @@ function Dashboard({ navigation }) {
   const _onPastasPress = () => categorias.openModal()
   const _onEventosPress = () => navigation.navigate('Eventos')
   const _onAjudaPress = () => navigation.navigate('Ajuda')
-  const _onCategoriaPress = (categoria) => pastas.openModal()
+  const _onCategoriaPress = (categoria) => {
+    setCategoria(categoria)
+    pastas.openModal()
+  }
   const _onOpenPasta = (id_pasta) => navigation.navigate('Pastas')
+  const _onOpenChat = (id_pasta) => navigation.navigate('Chat', { id_pasta })
 
   return (
     <Block flex style={styles.mainContainer}>
@@ -90,11 +95,11 @@ function Dashboard({ navigation }) {
       {/* PASTAS MODAL */}
       <SnappingList
         ref={el => { pastas = el }}
-        headerTitle={'Pastas'}>
-        {Array(50)
+        headerTitle={`Pastas - ${categoria}`}>
+        {Array(20)
           .fill(0)
           .map((_, i) => (
-            <CardPasta title='Ruinas' onPress={()=>console.log('card')} />))}
+            <CardPasta title='Ruinas' onPress={_onOpenChat} />))}
       </SnappingList>
     </Block>
   )

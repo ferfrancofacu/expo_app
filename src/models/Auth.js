@@ -1,8 +1,8 @@
-import Modal from './Modal'
+import Model from './Model'
 import firebase, { database } from '../firebase'
 import * as Google from 'expo-google-app-auth'
 
-class Auth extends Modal {
+class Auth extends Model {
   onAuthChange(callback = () => { }) {
     firebase.auth().onAuthStateChanged(user => {
       callback(user)

@@ -1,22 +1,22 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import { Block, Text, Icon } from 'galio-framework';
+import { Avatar, Card, Paragraph } from 'react-native-paper';
+import { Block, Icon } from 'galio-framework';
 
 export default function CardPasta({
-  codigo = 0,
-  title = 'Title',
+  id_pasta = 0,
+  title = 'Nome da Pasta',
   categoria = 'categorias',
   descricao = 'Descrição da pasta',
-  onPress = () => { }
+  onPress = () => {  }
 }) {
   return (
-    <Card style={styles.card} onPress={() => onPress(codigo)}>
-      <Card.Title title={title} subtitle={categoria}  left={(props) => (
+    <Card style={styles.card} onPress={() => onPress(id_pasta)}>
+      <Card.Title titleStyle={styles.cardTitle} title={title} subtitle={descricao} left={(props) => (
         <Avatar.Icon {...props} icon="folder" color="white" />)} />
-      <Card.Content style={styles.content}>
+      {/*<Card.Content style={styles.content}>
         <Paragraph>{descricao}</Paragraph>
-      </Card.Content>
+      </Card.Content> */}
       <Block style={styles.right} middle>
         <Icon name={'chevron-right'} family='octicon' color={'#2c3f5e'} size={17} />
       </Block>
@@ -38,5 +38,9 @@ const styles = StyleSheet.create({
     height: '100%',
     right: 10,
     zIndex: 2
+  },
+  cardTitle:{
+    fontSize: 14,
+    margin: 2
   }
 })

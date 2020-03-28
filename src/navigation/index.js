@@ -12,6 +12,7 @@ import Interesses from '../view/Interesses'
 import Eventos from '../view/Eventos'
 import Pastas from '../view/Pastas'
 import Ajuda from '../view/Ajuda'
+import Chat from '../view/Chat'
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ export default function navigation({ isAuth }) {
             <Stack.Screen name="Eventos" component={Eventos} />
             <Stack.Screen name="Pastas" component={Pastas} />
             <Stack.Screen name="Ajuda" component={Ajuda} />
+            <Stack.Screen name="Chat" component={Chat} />
           </>
         : /*  ROTAS LIVRE */
           <> 
