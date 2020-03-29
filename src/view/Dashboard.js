@@ -24,7 +24,6 @@ function Dashboard({ navigation }) {
 
   const _onSignOut = () => Auth.siginOut()
   const _onAvatarPress = () => navigation.navigate('Perfil')
-  const _onInterssePress = () => pastas.openModal() // navigation.navigate('Interesses')
   const _onPastasPress = () => categorias.openModal()
   const _onEventosPress = () => navigation.navigate('Eventos')
   const _onAjudaPress = () => navigation.navigate('Ajuda')
@@ -32,6 +31,10 @@ function Dashboard({ navigation }) {
     setCategoria(categoria)
     pastas.openModal()
   }
+  const _onInterssePress = () =>{ 
+    setCategoria('Interesses')
+    pastas.openModal()
+  } 
   const _onOpenPasta = (id_pasta) => navigation.navigate('Pastas')
   const _onOpenChat = (id_pasta) => navigation.navigate('Chat', { id_pasta })
 
