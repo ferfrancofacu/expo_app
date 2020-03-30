@@ -12,7 +12,7 @@ export const Abreviar = (nometodo) => {
   var nome = nometodo.replace(pattern, ' ');
   var nome = nome.split(' ');
 
-  var nomes_meio = ' ';
+  var nomes_meio = '';
   if (nome.length > 2) {
     for (var x = 1; x < nome.length - 1; x++) {
       nomes_meio += nome[x][0] + '. ';
@@ -22,5 +22,5 @@ export const Abreviar = (nometodo) => {
     }
   }
 
-  return `${nome[0]} ${nomes_meio} ${nome[nome.length - 1]}`;
+  return `${nome[0]} ${nomes_meio}${nome[nome.length - 1]}`;
 }
