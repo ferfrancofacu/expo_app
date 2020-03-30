@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import * as Animatable from 'react-native-animatable'
 import { Modalize } from 'react-native-modalize';
 import { Button } from 'react-native-paper';
+import { Text } from 'galio-framework'
 import faker from 'faker';
 
 import { height, StatusHeight } from '../constants/Utils'
@@ -15,15 +16,20 @@ export default class SnappingList extends React.PureComponent {
     toTopButton: false
   }
 
-  renderHeader = () => (
-    <View style={s.modal__header}>
-      <Text style={s.modal__headerText}>{this.props.headerTitle}</Text>
-      <Button compact={true}  uppercase={false} color={'#000'}>Criar Pasta +</Button>
-    </View>
-  );
+  renderHeader = () => {
+    const { headerTitle, headerSubTitle, headerSubTitleStyle } = this.props
+    return (
+      <View style={s.modal__header}>
+        <Text style={s.modal__headerText}>{headerTitle}</Text>
+        { headerSubTitle 
+        ? <Text style={[s.modal__headerText, headerSubTitleStyle]} muted>{headerSubTitle}</Text>
+        : <Button compact={true} uppercase={false} color={'#000'}>Criar Pasta +</Button>}
+      </View>
+    )
+  };
 
   renderFooter = () => this.state.toTopButton && (
-    <View style={{width: '100%', alignItems:'flex-end'}}>
+    <View style={{ width: '100%', alignItems: 'flex-end' }}>
       <TouchableOpacity
         onPress={this.scrollToTop}
         style={s.content__button}>
@@ -94,12 +100,12 @@ export default class SnappingList extends React.PureComponent {
   }
 
   render() {
-    const { 
-      flex = 0.75, 
-      fixed, 
+    const {
+      flex = 0.75,
+      fixed,
       HeaderComponent = this.renderHeader,
       modalStyle = {},
-      ...rest 
+      ...rest
     } = this.props
     return (
       <Modalize
@@ -129,7 +135,8 @@ const s = StyleSheet.create({
   modal__header: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingVertical: 15,
+    paddingVertical: 10,
+    paddingTop: 15,
     marginHorizontal: 15,
     borderBottomColor: '#eee',
     borderBottomWidth: 1,
