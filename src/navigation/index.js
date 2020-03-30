@@ -10,7 +10,6 @@ import Login from '../view/Login'
 import Empyt from '../view/Empyt'
 import Interesses from '../view/Interesses'
 import Eventos from '../view/Eventos'
-import Pasta from '../view/Pasta'
 import Ajuda from '../view/Ajuda'
 import Chat from '../view/Chat'
 
@@ -27,7 +26,6 @@ export default function navigation({ isAuth }) {
             <Stack.Screen name="Perfil" component={Perfil} />
             <Stack.Screen name="Interesses" component={Interesses} />
             <Stack.Screen name="Eventos" component={Eventos} />
-            <Stack.Screen name="Pasta" component={Pasta} />
             <Stack.Screen name="Ajuda" component={Ajuda} />
             <Stack.Screen name="Chat" component={Chat} />
           </>

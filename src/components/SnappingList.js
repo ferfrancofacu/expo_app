@@ -5,7 +5,7 @@ import { Modalize } from 'react-native-modalize';
 import { Button, Block } from 'galio-framework';
 import faker from 'faker';
 
-import { height } from '../constants/Utils'
+import { height, StatusHeight } from '../constants/Utils'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class SnappingList extends React.PureComponent {
@@ -93,16 +93,23 @@ export default class SnappingList extends React.PureComponent {
   }
 
   render() {
-    const { flex = 0.75, fixed } = this.props
+    const { 
+      flex = 0.75, 
+      fixed, 
+      HeaderComponent = this.renderHeader,
+      modalStyle = {},
+      ...rest 
+    } = this.props
     return (
       <Modalize
         ref={this.modal}
-        HeaderComponent={this.renderHeader}
+        HeaderComponent={HeaderComponent}
         FooterComponent={this.renderFooter}
-        snapPoint={height * flex}
+        snapPoint={height * flex - StatusHeight}
         modalHeight={fixed ? height * flex : height}
-        modalStyle={s.modal}
-        scrollViewProps={{ onScroll: this.onScroll }}>
+        modalStyle={[s.modal, modalStyle]}
+        scrollViewProps={{ onScroll: this.onScroll }}
+        {...rest}>
         {/* {this.renderContent()} */}
         {this.props.children}
       </Modalize>
