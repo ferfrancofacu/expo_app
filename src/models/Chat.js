@@ -1,4 +1,5 @@
 import Model from './Model'
+import moment from 'moment'
 import { snapshotToArray } from '../helpers';
 import firebase, { database } from '../firebase'
 
@@ -17,7 +18,7 @@ class Chat extends Model {
   sendMenssage = (messages, callback = () => { }) => {
     messages.user.name = this.getCurrentUser().displayName
     messages.user.photoURL = this.getCurrentUser().photoURL
-    messages.createdAt = new Date()
+    messages.createdAt = moment().format('x')
     this.chatRoomRef.add(messages).then(callback)
   }
 
@@ -27,11 +28,12 @@ class Chat extends Model {
       .orderBy('createdAt', 'desc')
       .onSnapshot(function (snapshot) {
         var source = snapshot.metadata.hasPendingWrites ? "Local" : "Server";
+        console.log(source)
         const messages = snapshotToArray(snapshot).map(message => {
           return ({
             _id: message._id,
             text: message.text,
-            createdAt: new Date(message.createdAt.seconds),
+            createdAt: moment(message.createdAt, 'x'),
             user: {
               _id: message.user._id,
               name: message.name,

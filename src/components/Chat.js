@@ -59,9 +59,9 @@ class MkChat extends React.Component {
           renderBubble={(props) => (
             <Bubble {...props}
               wrapperStyle={{
-                left: {
+                right: {
                   backgroundColor: Theme.colors.primary,
-                  opacity: 0.9
+                  opacity: 1,
                 }
               }} />
           )}

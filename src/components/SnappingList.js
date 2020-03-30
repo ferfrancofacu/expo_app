@@ -115,6 +115,7 @@ const s = StyleSheet.create({
   modal: {
     backgroundColor: '#f8f8f8',
     borderTopStartRadius: 40,
+    borderTopEndRadius: 40,
     padding: 15,
     paddingTop: 0
   },

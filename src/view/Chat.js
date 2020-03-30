@@ -17,7 +17,6 @@ export default class ChatSreen extends React.Component {
   }
 
   componentDidMount() {
-    console.log('asdas')
     this.chat.liveUpdateMessages(this._onLiveMenssage)
   }
 
@@ -37,7 +36,8 @@ export default class ChatSreen extends React.Component {
         style={styles.container}>
         <Header {...this.props} back menu
           title={'Nome da Pasta'}
-          subtitle={'Descrição da Pasta'} />
+          subtitle={'Descrição da Pasta'}
+          headerPress={() => this.props.navigation.navigate('Pasta')} />
         <Chat
           messages={messages}
           onSend={messages => this.onSend(messages)}
