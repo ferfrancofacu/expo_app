@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import * as Animatable from 'react-native-animatable'
 import { Modalize } from 'react-native-modalize';
-import { Button, Block } from 'galio-framework';
+import { Button } from 'react-native-paper';
 import faker from 'faker';
 
 import { height } from '../constants/Utils'
@@ -18,6 +18,7 @@ export default class SnappingList extends React.PureComponent {
   renderHeader = () => (
     <View style={s.modal__header}>
       <Text style={s.modal__headerText}>{this.props.headerTitle}</Text>
+      <Button compact={true}  uppercase={false} color={'#000'}>Criar Pasta +</Button>
     </View>
   );
 
@@ -118,6 +119,8 @@ const s = StyleSheet.create({
     paddingTop: 0
   },
   modal__header: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
     paddingVertical: 15,
     marginHorizontal: 15,
     borderBottomColor: '#eee',
@@ -125,6 +128,7 @@ const s = StyleSheet.create({
   },
   modal__headerText: {
     fontSize: 15,
+    alignSelf: 'center',
     fontWeight: '200',
   },
   content: {
