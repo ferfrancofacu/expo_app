@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Appbar, Menu, Divider } from 'react-native-paper'
+import { HeaderHeight, StatusHeight } from '../constants/Utils'
+import HeaderContent from './HeaderContent'
 
 const opts = [
   { action: () => { }, title: 'Item 1' },
@@ -10,6 +12,7 @@ const opts = [
 export default function Header({
   title = 'Title',
   subtitle,
+  headerPress,
   back,
   menu,
   options,
@@ -21,13 +24,14 @@ export default function Header({
   const _openMenu = () => setMenuVisable(true)
 
   return (
-    <Appbar.Header style={styles.header} dark={true}>
+    <View style={styles.header}>
       {back &&
         <Appbar.BackAction onPress={navigation.goBack} color={'white'} />}
-      <Appbar.Content
+      <HeaderContent
         title={title}
         subtitle={subtitle}
         color={'white'}
+        onPress={headerPress}
       />
       {menu &&
         <Menu
@@ -42,12 +46,18 @@ export default function Header({
               </>
             ))}
         </Menu>}
-    </Appbar.Header>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#3498db'
-  }
+    backgroundColor: '#3498db',
+    height: HeaderHeight,
+    paddingTop: StatusHeight,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 4,
+    elevation: 4,
+  },
 })
