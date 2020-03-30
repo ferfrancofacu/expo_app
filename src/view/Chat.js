@@ -37,7 +37,7 @@ export default class ChatSreen extends React.Component {
         <Header {...this.props} back menu
           title={'Nome da Pasta'}
           subtitle={'Descrição da Pasta'}
-          headerPress={() => console.log('aqui')} />
+          headerPress={() => this.props.navigation.navigate('Pasta')} />
         <Chat
           messages={messages}
           onSend={messages => this.onSend(messages)}
