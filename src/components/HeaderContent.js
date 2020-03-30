@@ -70,12 +70,12 @@ class AppbarContent extends React.Component {
 const styles = StyleSheet.create({
   touchable: {
     flex: 1,
-    height: '100%'
   },
   container: {
     flex: 1,
     paddingHorizontal: 12,
-    width: '100%'
+    paddingTop: 2,
+    height: '100%',
   },
   title: {
     fontSize: Platform.OS === 'ios' ? 17 : 20,
