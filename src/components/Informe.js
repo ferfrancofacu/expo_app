@@ -14,9 +14,10 @@ export default function AnaliseTecnica({
       <Card.Title titleStyle={styles.cardTitle} title={nome} subtitle={profissao} left={(props) => foto 
         ? <Avatar.Image {...props} source={{ uri: foto }} />  
         : <Avatar.Icon {...props} icon="folder" color="white" /> }/>
-      <Card.Content style={styles.content}>
-        <Paragraph>{analise}</Paragraph>
-      </Card.Content>
+      {!!analise && 
+        <Card.Content style={styles.content}>
+          <Paragraph>{analise}</Paragraph>
+        </Card.Content>}
     </Card>
   );
 }
