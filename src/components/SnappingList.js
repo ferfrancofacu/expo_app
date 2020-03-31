@@ -17,13 +17,12 @@ export default class SnappingList extends React.PureComponent {
   }
 
   renderHeader = () => {
-    const { headerTitle, headerSubTitle, headerSubTitleStyle } = this.props
+    const { headerTitle, headerSubTitle, headerSubTitleStyle, buttonRight, headerButtonPress = () => {} } = this.props
     return (
       <View style={s.modal__header}>
         <Text style={s.modal__headerText}>{headerTitle}</Text>
-        { headerSubTitle 
-        ? <Text style={[s.modal__headerText, headerSubTitleStyle]} muted>{headerSubTitle}</Text>
-        : <Button compact={true} uppercase={false} color={'#000'}>Criar Pasta +</Button>}
+        { headerSubTitle && <Text style={[s.modal__headerText, headerSubTitleStyle]} muted>{headerSubTitle}</Text>}
+        { buttonRight && <Button compact={true} uppercase={false} color={'#000'} onPress={headerButtonPress}>Criar Pasta +</Button>}
       </View>
     )
   };
