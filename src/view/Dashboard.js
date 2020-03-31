@@ -37,6 +37,7 @@ function Dashboard({ navigation }) {
   } 
   const _onOpenPasta = (id_pasta) => navigation.navigate('Pastas')
   const _onOpenChat = (id_pasta) => navigation.navigate('Chat', { id_pasta })
+  const _onOpenCriarPastas = () => navigation.navigate('CriarPasta')
 
   return (
     <Block flex style={styles.mainContainer}>
@@ -96,9 +97,11 @@ function Dashboard({ navigation }) {
       </SnappingList>
 
       {/* PASTAS MODAL */}
-      <SnappingList
+      <SnappingList 
         ref={el => { pastas = el }}
-        headerTitle={`Pastas - ${categoria}`}>
+        headerTitle={`Pastas - ${categoria}`}
+        buttonRight
+        headerButtonPress={_onOpenCriarPastas}>
         {Array(20)
           .fill(0)
           .map((_, i) => (
