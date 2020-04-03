@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { Block } from 'galio-framework'
 import Swiper from 'react-native-swiper';
+import { FAB } from 'react-native-paper';
 
-export default class App extends Component {
-  render() {
-    return (
-      <Swiper style={styles.wrapper} showsButtons>
+export default function CriarPasta(props) {
+  const [pagina, setPagina] = useState(0)
+
+  return (
+    <Block flex>
+      <Swiper style={styles.wrapper}
+        showsPagination={false}
+        scrollEnabled={false}
+        index={pagina}>
         <View style={styles.slide1}>
           <Text style={styles.text}>Hello Swiper</Text>
         </View>
@@ -16,10 +23,15 @@ export default class App extends Component {
           <Text style={styles.text}>And simple</Text>
         </View>
       </Swiper>
-    );
-  }
+      <FAB
+        style={styles.fab}
+        color={'#fff'}
+        icon="chevron-right"
+        onPress={() => console.log('Pressed')}
+      />
+    </Block>
+  )
 }
-
 const styles = StyleSheet.create({
   wrapper: {
   },
@@ -45,5 +57,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 30,
     fontWeight: 'bold'
-  }
+  },
+  fab: {
+    backgroundColor: '#000',
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
 });
