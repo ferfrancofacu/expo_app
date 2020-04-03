@@ -69,11 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   fab: {
-<<<<<<< HEAD
-    backgroundColor: '#000',
-=======
     backgroundColor: theme.colors.primary,
->>>>>>> 3fd6910a990c661720971b12be4172dc73c1aab5
     position: 'absolute',
     margin: 16,
     right: 0,
