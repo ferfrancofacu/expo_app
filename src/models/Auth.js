@@ -9,6 +9,16 @@ class Auth extends Model {
     })
   }
 
+  hasFinishRegister = async () => {
+    const user = firebase.auth().currentUser
+    if(!!user){
+      const userData = await database.collection("/users/").doc(user.uid).get()
+      return !!userData.data().finishRegistrer
+    }else{
+      return false
+    }
+  }
+
   siginOut() {
     return firebase.auth().signOut()
   }

@@ -16,21 +16,23 @@ import CriarPasta from '../view/CriarPasta'
 
 const Stack = createStackNavigator();
 
-export default function navigation({ isAuth }) {
+export default function navigation({ isAuth, finishRegister }) {
+  const initialRoute = !!finishRegister ? 'Dashboard' : 'Cadastro'
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode={"none"}>
-        {!!isAuth
-        ? /*  ROTAS AUTENTICADAS */
-          <> 
-            <Stack.Screen name="Dashboard" component={Dashboard} />
-            <Stack.Screen name="Perfil" component={Perfil} />
-            <Stack.Screen name="Interesses" component={Interesses} />
-            <Stack.Screen name="Eventos" component={Eventos} />
-            <Stack.Screen name="Ajuda" component={Ajuda} />
-            <Stack.Screen name="Chat" component={Chat} />
-            <Stack.Screen name="CriarPasta" component={CriarPasta} />
-          </>
+      <Stack.Navigator headerMode={"none"} initialRouteName={initialRoute}>
+        {!!isAuth /*  ROTAS AUTENTICADAS */
+        ? !finishRegister 
+          ? <> 
+              <Stack.Screen name="Dashboard" component={Dashboard} />
+              <Stack.Screen name="Perfil" component={Perfil} />
+              <Stack.Screen name="Interesses" component={Interesses} />
+              <Stack.Screen name="Eventos" component={Eventos} />
+              <Stack.Screen name="Ajuda" component={Ajuda} />
+              <Stack.Screen name="Chat" component={Chat} />
+              <Stack.Screen name="CriarPasta" component={CriarPasta} />
+            </>
+          : <Stack.Screen name="Cadastro" component={Empyt} />
         : /*  ROTAS LIVRE */
           <> 
             <Stack.Screen name="Login" component={Login} />

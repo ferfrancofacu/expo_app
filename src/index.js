@@ -38,7 +38,9 @@ export default class App extends React.Component {
 
     this.state = {
       isLoadingComplete: false,
-      isAuth: false
+      isAuth: false,
+      signedIn: false,
+      finishRegister: false,
     }
   }
 
@@ -49,13 +51,14 @@ export default class App extends React.Component {
 
   componentDidMount() {
     console.log('onCreate::Main')
-    Auth.onAuthChange(user => {
-      this.setState({ isAuth: !!user })
+    Auth.onAuthChange(async user => {
+      let finishRegister = await Auth.hasFinishRegister()
+      this.setState({ isAuth: !!user, finishRegister })
     })
   }
 
   render() {
-    const { isLoadingComplete, isAuth } = this.state
+    const { isLoadingComplete, finishRegister, isAuth } = this.state
     if (!isLoadingComplete) {
       return (
         <AppLoading
@@ -69,7 +72,7 @@ export default class App extends React.Component {
         <PaperProvider theme={ThemePaper}>
           <GalioProvider>
             <Block flex>
-              <Navigation isAuth={isAuth} />
+              <Navigation finishRegister={finishRegister} isAuth={isAuth} />
             </Block>
 
             {/* comments */}
@@ -85,7 +88,13 @@ export default class App extends React.Component {
 
   _loadResourcesAsync = async () => {
     return Promise.all([
-      ...cacheImages(assetImages)
+      ...cacheImages(assetImages),
+      new Promise((resolve, rejects) => {
+        Auth.hasFinishRegister().then(finishRegister => {
+          this.setState({ finishRegister })
+          resolve()
+        }).catch(rejects)
+      })
     ]);
   };
 
