@@ -1,33 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Block } from 'galio-framework'
 import Swiper from 'react-native-swiper';
 import { FAB } from 'react-native-paper';
+import theme from '../constants/ThemePaper'
 
 export default function CriarPasta(props) {
-  const [pagina, setPagina] = useState(0)
+  let swiper = null
+
+  const _onNextPage = () => {
+    swiper.scrollBy(1)
+  }
+
+  const _onPrevPage = () => {
+    swiper.scrollBy(-1)
+  }
 
   return (
     <Block flex>
       <Swiper style={styles.wrapper}
         showsPagination={false}
         scrollEnabled={false}
-        index={pagina}>
-        <View style={styles.slide1}>
-          <Text style={styles.text}>Hello Swiper</Text>
-        </View>
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
-        </View>
+        index={1}
+        ref={e => swiper = e}>
         <View style={styles.slide3}>
           <Text style={styles.text}>And simple</Text>
+        </View>
+        <View style={styles.slide2}>
+          <Text style={styles.text}>aaa</Text>
+        </View>
+        <View style={styles.slide1}>
+          <Text style={styles.text}>Beautiful</Text>
         </View>
       </Swiper>
       <FAB
         style={styles.fab}
         color={'#fff'}
         icon="chevron-right"
-        onPress={() => console.log('Pressed')}
+        onPress={_onNextPage}
       />
     </Block>
   )
@@ -59,7 +69,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   fab: {
+<<<<<<< HEAD
     backgroundColor: '#000',
+=======
+    backgroundColor: theme.colors.primary,
+>>>>>>> 3fd6910a990c661720971b12be4172dc73c1aab5
     position: 'absolute',
     margin: 16,
     right: 0,
