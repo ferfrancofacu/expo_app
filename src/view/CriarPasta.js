@@ -1,78 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, BackHandler } from 'react-native';
 import { Block } from 'galio-framework'
 import Swiper from 'react-native-swiper';
-import { FAB } from 'react-native-paper';
+import { FAB, Title, TextInput, Button } from 'react-native-paper';
 import theme from '../constants/ThemePaper'
+
+import OneStep from './cadastro/StepOne'
+
+function useBackButton(handler) {
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", handler);
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", handler);
+    };
+  }, [handler]);
+}
 
 export default function CriarPasta(props) {
   let swiper = null
+  let countPage = 2
+
+  const [page, setPage] = useState(0)
 
   const _onNextPage = () => {
+    if(page+1 == countPage) return
     swiper.scrollBy(1)
+    setPage(page+1)
   }
 
   const _onPrevPage = () => {
+    if(page == 0) return
     swiper.scrollBy(-1)
+    setPage(page-1)
   }
 
+  useBackButton(_onPrevPage)
+
   return (
-    <Block flex>
+    <Block flex style={styles.contentContainer}>
       <Swiper style={styles.wrapper}
         showsPagination={false}
         scrollEnabled={false}
-        index={1}
         ref={e => swiper = e}>
-        <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
-        </View>
-        <View style={styles.slide2}>
-          <Text style={styles.text}>aaa</Text>
-        </View>
-        <View style={styles.slide1}>
-          <Text style={styles.text}>Beautiful</Text>
+        <OneStep next={_onNextPage} prev={_onPrevPage} />
+        <View>
+          <Text>aaa</Text>
         </View>
       </Swiper>
-      <FAB
-        style={styles.fab}
-        color={'#fff'}
-        icon="chevron-right"
-        onPress={_onNextPage}
-      />
     </Block>
   )
 }
-const styles = StyleSheet.create({
-  wrapper: {
-  },
-  slide1: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB'
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#97CAE5'
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#92BBD9'
-  },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold'
-  },
-  fab: {
-    backgroundColor: theme.colors.primary,
-    position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
-  },
-});
+
+const styles = StyleSheet.create({})
