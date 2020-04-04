@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { Button, Text } from 'react-native-paper'
+import { Block } from 'galio-framework'
 
 export default function Empyt() {
   // Criar estado
@@ -16,11 +17,9 @@ export default function Empyt() {
   }, [count])
 
   return (
-    <View>
+    <Block flex center middle>
       <Text>{count}</Text>
-      <Button
-        onPress={() => setCount(count++)}>
-      </Button>
-    </View>
+      <Button onPress={() => setCount(count+1)}>Press me</Button>
+    </Block>
   );
 }

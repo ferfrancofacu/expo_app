@@ -18,7 +18,12 @@ export default function Login({ navigation }) {
   async function logInGoogle() {
     if (loading) return
     setLoading(true)
-    await Auth.onSignInGoogle()
+    let login = await Auth.onSignInGoogle()
+    if(login.user.finishRegistrer){
+      console.log('Usuario finalizou o cadastro')
+    }else{
+      console.log('Usuario nao terminou o cadastro')
+    }
     setLoading(false)
   }
 
